@@ -4,6 +4,8 @@ A game development DSL, inspired by Yasuko Ohba's Ruby Kaigi talk and a late nig
 
 This is very experimental and marginally useful. I don't think the spec works.
 
+Pie requires Ruby 1.9, because it is so cool.
+
 There is a sample in book.rb.  To use it:
 
     ruby book.rb
