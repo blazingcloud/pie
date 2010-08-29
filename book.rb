@@ -1,3 +1,4 @@
+$LOAD_PATH << File.dirname(__FILE__)
 require 'pie'
 require 'rubygems'
 require 'sinatra'
@@ -20,7 +21,7 @@ get "/:place_name" do
 
   name = params[:place_name]
   $current = name unless name.nil?
-    erb :image_page
+  erb :image_page
 end
 
 

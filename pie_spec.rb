@@ -1,5 +1,4 @@
-
-require "pie"
+require File.expand_path(File.dirname(__FILE__) + '/pie')
 
 describe "making pie" do
   include Pie
