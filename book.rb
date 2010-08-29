@@ -1,27 +1,21 @@
 $LOAD_PATH << File.dirname(__FILE__)
 require 'pie'
-require 'rubygems'
-require 'sinatra'
 
-
-class Book < Pie
-  place :title, :description => "This is a book about big things"
-  place :ship, :description =>"ookina funa"
-  place :building, :description => "ookina biru"
-  place :tower,:description => "ookina towa"
-
-  image :ship => "images/big_ship.jpg", 
-        :building => "images/building.jpg", 
-        :tower => "images/tokyo_tower.jpg" 
+def make_pie(&block)
+  $pie = Pie.new
+  $pie.instance_eval(&block)
 end
-Book.start(:ship)
 
-get "/:place_name" do
-    puts "$pie is #{$pie.inspect}"
+make_pie do
+  create_places do
+    ship description:"ookina funa"
+    building description:"ookina biru"
+    tower description:"ookina towa"
+  end
 
-  name = params[:place_name]
-  $current = name unless name.nil?
-  erb :image_page
+  image ship:"images/big_ship.jpg", 
+        building:"images/building.jpg", 
+        tower:"images/tokyo_tower.jpg" 
 end
 
 
