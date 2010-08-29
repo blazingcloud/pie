@@ -1,32 +1,37 @@
-require 'rubygems'
-require 'sinatra'
 class Pie
-  def image
-    @images ||= {}
-    @images.merge(yield) if block_given?
+  def self.image(image_hash)
+    @@images ||= {}
+    puts "--- set image"
+    puts image_hash.inspect
+    @@images.merge!(image_hash)
   end
 
-  def place name, options
-    @places ||= {}
-    @places[name] = options
+  def self.place name, options
+    @@places ||= {}
+    @@places[name.to_sym] = options
   end
 
-  def start(starting_place)
-    $pie = this
+  def self.start(starting_place)
+    puts "starting at #{starting_place}"
+    $pie = new
+    puts "$pie is #{$pie.inspect}"
+
     $current = starting_place
   end
 
-  def render(place_name)
-    @image = @images[:place_name]
-    @description = @places[:place_name][:description]
-    erb :image_page
+  def current_image
+    puts "------- current_image"
+    puts $current.inspect
+    puts @@images.inspect
+    @@images[$current.to_sym]
+  end
+
+  def current_description
+    puts "------- current_description"
+    puts $current
+    puts @@places
+    place = @@places[$current.to_sym]
+    place[:description] unless place.nil?
   end
 end
 
-get "/" do
-   $pie.render($current)
-end
-
-get "/:place_name" do
-  $current = params[:place_name]
-end
