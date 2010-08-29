@@ -15,9 +15,11 @@ class Pie
     end
   end
 
-  at_exit { puts "exit"; WebApp.run! }
+  at_exit { WebApp.run! if $0.include?("_spec")}
 
   attr_accessor :places
+  attr_accessor :images
+
   class Places < Array
     def method_missing name, *args
       puts "making a #{name} with #{args[0].inspect}"
