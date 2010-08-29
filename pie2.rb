@@ -1,5 +1,11 @@
+require 'sinatra/base'
 
-class Pie
+class Pie 
+  class WebApp < Sinatra::Base
+  end
+
+  at_exit { puts "exit"; WebApp.run! }
+
   attr_accessor :places
   class Places < Array
     def method_missing name, *args
@@ -34,7 +40,7 @@ make_pie do
     tower description:"ookina towa"
   end
 
-  image :ship => "images/big_ship.jpg", 
-        :building => "images/building.jpg", 
-        :tower => "images/tokyo_tower.jpg" 
+  image ship:"images/big_ship.jpg", 
+        building:"images/building.jpg", 
+        tower:"images/tokyo_tower.jpg" 
 end
