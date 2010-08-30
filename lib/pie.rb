@@ -2,7 +2,7 @@ require 'sinatra/base'
 
 class Pie 
   class WebApp < Sinatra::Base
-    set :root, File.dirname(__FILE__)
+    set :root, File.join(File.expand_path(File.dirname(__FILE__)), "..")
 
     get '/' do
       "hello"

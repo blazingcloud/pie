@@ -1,5 +1,5 @@
 $LOAD_PATH << File.dirname(__FILE__)
-require 'pie'
+require 'lib/pie'
 
 def make_pie(&block)
   $pie = Pie.new
