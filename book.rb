@@ -8,7 +8,7 @@ end
 
 make_pie do
   create_places do
-    ship description:"ookina funa"
+    ship description:"ookina fune"
     building description:"ookina biru"
     tower description:"ookina towa"
   end

@@ -20,10 +20,31 @@ class Pie
   attr_accessor :places
   attr_accessor :images
 
-  class Places < Array
-    def method_missing name, *args
-      puts "making a #{name} with #{args[0].inspect}"
-      self << {name.to_sym => args[0]}
+  class Places < Hash
+    def method_missing name, options = {}
+      unless options.is_a? Hash
+        puts "options for creating a place must have key and value"
+        return
+      end
+      puts "making a #{name} with #{options.inspect}"
+      self[name.to_sym] = options
+    end
+
+    def after(place_name)
+      index = keys.index(place_name.to_sym)
+      next_place_name = keys[index + 1]
+      self[next_place_name]
+    end
+
+    def before(place_name)
+      index = keys.index(place_name.to_sym)
+      index = index - 1
+      if index < 0
+        nil
+      else
+        prev_place_name = keys[index]
+        self[prev_place_name]
+      end
     end
   end
 
