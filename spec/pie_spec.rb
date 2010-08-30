@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/pie')
+require File.join(File.expand_path(File.dirname(__FILE__)), "pie")
 
 describe "making pie" do
   describe "image declaration" do
