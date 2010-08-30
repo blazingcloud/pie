@@ -1,31 +1,56 @@
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
 <head>
-<style type="text/css">
-  .page {
-    width: 100%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  img {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: 100%;
-  }
-
-  .description {
-    font-size: 72;
-    font-weight: bold;
-    text-align: center
-  }
-</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title><%= $current %></title>
+	<style type="text/css" media="screen">
+		
+		
+		img.bg {
+			/* Set rules to fill background */
+			min-height: 100%;
+			min-width: 1024px;
+			
+			/* Set up proportionate scaling */
+			width: 100%;
+			height: auto;
+			
+			/* Set up positioning */
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+		
+		@media screen and (max-width: 1024px){
+			img.bg {
+				left: 50%;
+				margin-left: -512px; }
+		}
+		
+		div#content {
+			/* This is the only important rule */
+			/* We need our content to show up on top of the background */
+			position: relative; 
+			
+			/* These have no effect on the functionality */
+			width: 100%;
+			margin: 0 auto;
+			padding: 20px;
+			font-family: helvetica, arial, sans-serif;
+			font-size: 32pt;
+			line-height: 40pt;
+      text-align: center;
+		}
+		
+	</style>
 </head>
+
 <body>
-<div class="page">
-    <div class="description"><%= $pie.current_description %></div>
-    <img src="<%= $pie.current_image %>" alt="image" />
+<img src="<%= $pie.current_image %>" class="bg" />
+<div id="content">
+  <p><%= $pie.current_description %></p>
 </div>
 </body>
+
 </html>
