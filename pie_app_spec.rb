@@ -1,17 +1,18 @@
 $LOAD_PATH << File.dirname(__FILE__)
 require 'pie'
-require 'rack/test'
+require 'capybara'
+require 'capybara/dsl'
 
 describe "app created with pie" do
-    include Rack::Test::Methods
+    include Capybara
 
-    def app
-      Pie::WebApp
+    before do
+      Capybara.app = Pie::WebApp
     end
 
     it "should say hello for the root path" do 
-      get '/'
-      last_response.body.should == "hello"
+      visit '/'
+      page.should have_content "hello"
     end
 
     describe "with one place and an image" do
