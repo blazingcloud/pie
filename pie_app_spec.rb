@@ -25,10 +25,10 @@ describe "app created with pie" do
             image ship:"images/big_ship.jpg" 
           end
       end
-      #it "should display the ship page" do
-      #  visit '/ship'
-      #  page.should have_content('ookina fune')
-      #end
+      it "should display the ship page" do
+        visit '/ship'
+        page.should have_content('ookina fune')
+      end
     end
 
 

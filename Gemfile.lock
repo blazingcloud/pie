@@ -25,6 +25,7 @@ GEM
       rubyzip
     sinatra (1.0)
       rack (>= 1.0)
+    sinatra-auto-reload (0.0.6)
 
 PLATFORMS
   ruby
@@ -33,3 +34,4 @@ DEPENDENCIES
   capybara
   rack-test
   sinatra
+  sinatra-auto-reload
