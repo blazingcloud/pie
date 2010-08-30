@@ -15,7 +15,7 @@ class Pie
     end
   end
 
-  at_exit { WebApp.run! if $0.include?("_spec")}
+  at_exit { WebApp.run! if !$0.include?("spec")}
 
   attr_accessor :places
   attr_accessor :images
