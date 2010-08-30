@@ -6,7 +6,7 @@ describe "making pie" do
     make_pie do
       image ship:"http://foo.com/ship.png"
     end
-    $pie.images.should == {ship:"http://foo.com/ship.png"}
+    $pie.images[:ship].should == "http://foo.com/ship.png"
   end
 
   it "can declare multiple image statements" do
@@ -14,8 +14,8 @@ describe "making pie" do
       image ship:"http://foo.com/ship.png"
       image basket:"http://foo.com/basket.png"
     end
-    $pie.images.should == {ship:"http://foo.com/ship.png",
-                      basket:"http://foo.com/basket.png"}
+    $pie.images[:ship].should == "http://foo.com/ship.png"
+    $pie.images[:basket].should == "http://foo.com/basket.png"
   end
 
   it "can declare multiple images with one statement" do
@@ -23,8 +23,8 @@ describe "making pie" do
       image ship:"http://foo.com/ship.png",
           basket:"http://foo.com/basket.png"
     end
-    $pie.images.should == {ship:"http://foo.com/ship.png",
-                      basket:"http://foo.com/basket.png"}
+    $pie.images[:ship].should == "http://foo.com/ship.png"
+    $pie.images[:basket].should == "http://foo.com/basket.png"
   end
 
 end
