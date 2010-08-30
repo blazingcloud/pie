@@ -69,8 +69,8 @@ class Pie
 
   def current_description
     puts "------- current_description"
-    puts $current
-    puts @places
+    puts $current.inspect
+    puts @places.inspect
     place = @places[$current.to_sym]
     place[:description] unless place.nil?
   end

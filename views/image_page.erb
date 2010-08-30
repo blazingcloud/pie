@@ -15,7 +15,7 @@
     height: 100%;
   }
 
-  p {
+  .description {
     font-size: 36;
     font-weight: bold;
     text-align: center
@@ -24,6 +24,7 @@
 </head>
 <body>
 <div class="page">
+    <div class="description"><%= $pie.current_description %></div>
     <img src="<%= $pie.current_image %>" alt="image" />
 </div>
 </body>
