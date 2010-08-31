@@ -2,11 +2,6 @@
 $LOAD_PATH << File.dirname(__FILE__)
 require 'lib/pie'
 
-def make_pie(&block)
-  $pie = Pie.new
-  $pie.instance_eval(&block)
-end
-
 make_pie do
   create_places do
     ship description:"大きな船"

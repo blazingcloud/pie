@@ -1,6 +1,18 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), "pie")
+require File.join(File.expand_path(File.dirname(__FILE__)), "..", "lib", "pie")
 
 describe "making pie" do
+  describe "with template" do
+    it "has a default template" do
+      make_pie {}
+      $pie.default_template.should == :image_page
+    end
+    it "can set an alternate template" do
+      make_pie do
+        template :foo
+      end
+      $pie.default_template.should == :foo
+    end
+  end
   describe "image declaration" do
     it "can declare an image" do
       make_pie do
@@ -47,6 +59,22 @@ describe "making pie" do
       end
       $pie.places[:ship].should == nil
     end
+    describe "with non-linear connections" do
+      before do
+        make_pie do
+          create_places do
+            field description:"You are in a large, grassy field.  You see many trees to the north and a path to the east", links:{forest:"North", cliff:"East"} 
+            forest description:"It is dark in the forest", links:{field:"South"}
+            cliff_top description:"The path ends at the top of a steep cliff", links:{cliff_bottom:"East", field:"West"}
+            cliff_bottom description:"You walked off the cliff and fell to your death"
+          end
+        end
+      end
+      it "can provide a list of places to go" do
+        place = $pie.places[:field]
+        place.links.should == {forest:"North", cliff:"East"}
+      end
+    end
 
   end
   describe "can access places" do
@@ -60,8 +88,14 @@ describe "making pie" do
       end
     end
 
-    it "which are accessible by named key" do
+    it "which are accessible by named key (symbol)" do
       ship = $pie.places[:ship]
+      ship.should_not be_nil
+      ship[:description].should == "ookina fune"
+    end
+    
+    it "which are accessible by named key (string)" do
+      ship = $pie.places["ship"]
       ship.should_not be_nil
       ship[:description].should == "ookina fune"
     end
