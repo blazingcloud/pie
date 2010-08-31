@@ -1,3 +1,11 @@
 ship: http://www.flickr.com/photos/savannahgrandfather/297715985/sizes/o/
 building:  http://www.flickr.com/photos/nikonvscanon/3453373352/sizes/o/
 tower: http://www.flickr.com/photos/twicepix/4086153702/
+photos by Lee Lundrigan, for testing purposes only:
+#	city.JPG
+#	gate.JPG
+#	park.JPG
+#	river.JPG
+#	trees.JPG
+#	water.JPG
+  
