@@ -27,6 +27,7 @@ class Pie
       $current = name unless name.nil?
       puts "current place name is #{$current}"
       puts "current place is #{$pie.places[$current]}"
+      puts "--- skip out"; return if $pie.places[$current].nil?
       puts "current links are #{$pie.places[$current].links.inspect}"
       puts "displaying template: #{$pie.default_template.inspect}"
       erb $pie.default_template
