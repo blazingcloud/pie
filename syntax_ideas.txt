@@ -69,6 +69,24 @@ make_pie do
   image trees:"images/trees.JPG"
 end
 
+# Need to write code to report nicer errors
+# method_missing makes for weird errors
+
+    it "cannot create a place if options are invalid (given as a symbol not a Hash)" do
+      make_pie do
+        create_places do
+          result = ship :invalid
+          result.should == nil
+        end
+      end
+      $pie.places[:ship].should == nil
+    end
+
+    def method_missing name, options = {}
+      unless options.is_a? Hash
+        puts "options for creating a place must have key and value"
+        return
+      end
 
 # Issues: 
 * image syntax is sensitive to space and this won't work:

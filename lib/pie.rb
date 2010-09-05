@@ -1,12 +1,18 @@
 require 'sinatra/base'
-
+#puts "----------------- Ruby version = #{RUBY_VERSION}"
+#raise ScriptError, "Pie requires Ruby 1.9 or higher" if RUBY_VERSION < "1.9.0"
+NO_WAY_BACK = ""
 class Pie 
+  
+
   attr_accessor :places
   attr_accessor :images
   attr_accessor :default_template
 
   def initialize
     @default_template = :image_page
+    @places = Places.new
+    @map = Map.new(@places)
   end
 
   class WebApp < Sinatra::Base
@@ -29,13 +35,41 @@ class Pie
 
   at_exit { WebApp.run! if !$0.include?("spec")}
 
+  class Map
+
+    def initialize places
+      @places = places
+    end
+
+    def path endpoints
+      puts "---> path #{endpoints.inspect}"
+      puts @places.inspect
+      #if h.size != 2
+      #  return puts "path must have two and only two endpoints."
+      #end
+      start_place_key, end_place_key = endpoints.keys
+      label_for_end, label_for_start = endpoints.values
+
+      start_place =  @places[start_place_key]
+      end_place =  @places[end_place_key]
+      raise ArgumentError, "there is no place named '#{start_place_key}'" if start_place.nil?
+      raise ArgumentError, "there is no place named '#{end_place_key}'" if end_place.nil?
+
+      start_place[:links][end_place_key] = label_for_end unless label_for_end.empty?
+      end_place[:links][start_place_key] = label_for_start unless label_for_start.empty?
+    end
+  end
+
   class Place < Hash
+    def initialize
+      self[:links] = {}
+    end
     def links
       result = self[:links]
-      result ||= {} 
     end
 
   end
+
   class Places < Hash
     def method_missing name, options = {}
       unless options.is_a? Hash
@@ -76,8 +110,12 @@ class Pie
   end
 
   def create_places(&block)
-    @places ||= Places.new
     @places.instance_eval(&block)
+  end
+
+  def map(&block)
+    puts "-------- creating map --------"
+    @map.instance_eval(&block)
   end
 
   def image(image_hash)
@@ -110,3 +148,12 @@ def make_pie(&block)
   puts "-------------------------- pie complete ---------------------------- "
 end
 
+def more_pie(&block)
+  puts "-------------------------- more pie ---------------------------- "
+  if $pie.nil?
+    puts "How can you make more pie when you haven't made any pie yet?"
+    return
+  end
+  $pie.instance_eval(&block)
+  puts "-------------------------- pie complete ---------------------------- "
+end

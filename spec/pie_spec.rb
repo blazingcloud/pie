@@ -33,7 +33,7 @@ describe "making pie" do
     it "can declare multiple images with one statement" do
       make_pie do
         image ship:"http://foo.com/ship.png",
-            basket:"http://foo.com/basket.png"
+              basket:"http://foo.com/basket.png"
       end
       $pie.images[:ship].should == "http://foo.com/ship.png"
       $pie.images[:basket].should == "http://foo.com/basket.png"
@@ -59,20 +59,41 @@ describe "making pie" do
       end
       $pie.places[:ship].should == nil
     end
-    describe "with non-linear connections" do
+    describe "with paths" do
       before do
         make_pie do
           create_places do
-            field description:"You are in a large, grassy field.  You see many trees to the north and a path to the east", links:{forest:"North", cliff:"East"} 
-            forest description:"It is dark in the forest", links:{field:"South"}
-            cliff_top description:"The path ends at the top of a steep cliff", links:{cliff_bottom:"East", field:"West"}
+            field description:"You are in a large, grassy field. You see many trees to the north and a path to the east"
+            forest description:"It is dark in the forest"
+            cliff_top description:"The path ends at the top of a steep cliff"
             cliff_bottom description:"You walked off the cliff and fell to your death"
           end
         end
       end
-      it "can provide a list of places to go" do
-        place = $pie.places[:field]
-        place.links.should == {forest:"North", cliff:"East"}
+      it "should have links between two places" do
+        more_pie do
+          map do
+            puts "----- inside map block ---"
+            path(field:"North", forest:"South")
+            path(field:"East", cliff_top:"West")
+          end
+          place = places[:field]
+          place.links.should == {forest:"North", cliff_top:"East"}
+
+        end
+      end
+      it "should have one way links" do
+        more_pie do
+          map do
+            path(cliff_top:"East", cliff_bottom:NO_WAY_BACK)
+          end
+          cliff_top = places[:cliff_top]
+          cliff_top.should_not == nil
+          cliff_top.links.should == { cliff_bottom:"East"}
+          cliff_bottom = places[:cliff_bottom]
+          cliff_bottom.should_not  == nil
+          cliff_bottom.links.should == {}
+        end
       end
     end
 
