@@ -6,7 +6,7 @@ make_pie do
   create_places do
     ship description:"大きな船"
     building description:"ookina biru"
-    tower description:"ookina towa"
+    tower description:"ookina tawaa"
   end
 
   image ship:"images/big_ship.jpg", 
