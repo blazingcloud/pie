@@ -9,15 +9,22 @@
 		body {
 			background: #000;
     }
+    
+    div#background {
+			position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%
+    }
 
-		img.bg {
+		div#background img {
 		  	
 			/* Set up proportionate scaling */
 			width: auto;
 			height: 100%;
 			
 			/* Set up positioning */
-			position: fixed;
       margin-left: auto;
       margin-right: auto;
       display: block;
@@ -29,7 +36,7 @@
 			position: relative; 
 			
 			/* These have no effect on the functionality */
-			width: 80%;
+			width: 400px;
 			margin: 0 auto;
 			background: #fff;
 			padding: 20px;
@@ -44,7 +51,9 @@
 </head>
 
 <body>
-<img src="<%= $pie.current_image %>" class="bg" />
+<div id="background">
+  <img src="<%= $pie.current_image %>" />
+</div>
 <div id="content">
   <p><%= $pie.current_description %></p>
   <p>
