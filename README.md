@@ -1,6 +1,6 @@
 # Pie
 
-A game development DSL, inspired by Yasuko Ohba's Ruby Kaigi talk and a late night coversaton with @knowtheory. Created by Sarah Allen with a little help from Chad Fowler.
+A game development DSL, inspired by Yasuko Ohba's Ruby Kaigi talk and a late night coversaton with @knowtheory, @wycats, @sarahmei and @ultrasaurus.
 
 This is very experimental and marginally useful. Spec works, but coverage is meager. 
 
@@ -31,8 +31,13 @@ then go to:
 Follow links to wander around the game world.  Yes, that is all there is right now.
 
 
-## Pie Core Team
+## Pie Contributors
 
+Core team
 * Sarah Allen 
 * Sarah Mei
+
+Contributors
+* Akira Matsuda
+* Chad Fowler
 
