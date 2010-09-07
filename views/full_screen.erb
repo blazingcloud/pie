@@ -6,22 +6,27 @@
 	<title><%= $current %></title>
 	<style type="text/css" media="screen">
 		
-		body {
-			background: #000;
-    }
-
+		
 		img.bg {
-		  	
+			/* Set rules to fill background */
+			min-height: 100%;
+			min-width: 1024px;
+			
 			/* Set up proportionate scaling */
-			width: auto;
-			height: 100%;
+			width: 100%;
+			height: auto;
 			
 			/* Set up positioning */
 			position: fixed;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-    }
+			top: 0;
+			left: 0;
+		}
+		
+		@media screen and (max-width: 1024px){
+			img.bg {
+				left: 50%;
+				margin-left: -512px; }
+		}
 		
 		div#content {
 			/* This is the only important rule */
