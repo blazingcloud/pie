@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+if RUBY_VERSION < "1.9.0"
+  puts "Error: pie requires Ruby 1.9, please use RVM."
+  exit
+end
+
+if ARGV.size == 0
+  puts "Usage: pie myfile"
+  exit
+end
+
+pie_file = ARGV.first
+pie_file = "#{pie_file}.pie" unless File.exist?(pie_file)
+
+unless File.exist?(pie_file)
+  puts "Unknown file #{ARGV.first}, please try again."
+  exit
+end
+
+begin
+  require 'pie'
+rescue LoadError
+  $LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
+  require 'pie'
+end
+
+include Pie
+load pie_file
+
+require 'pie_server'
+WebApp.run!

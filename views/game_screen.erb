@@ -52,13 +52,15 @@
 
 <body>
 <div id="background">
-  <img src="<%= $pie.current_image %>" />
+  <% if current_image %>
+    <img src="<%= current_image %>" />
+  <% end %>
 </div>
 <div id="content">
-  <p><%= $pie.current_description %></p>
+  <p><%= current_place.description %></p>
   <p>
-  <% $pie.places[$current].links.each do |place_name, label| %>
-    <%= "  <a href='#{place_name}'>#{label.to_s}</a>  "  %>
+  <% current_place.paths.each do |place_name, label| %>
+    <%= "  <a href='#{place_name}'>#{label}</a>  "  %>
   <% end %>
   </p>
 </div>

@@ -1,23 +1,14 @@
-$LOAD_PATH << File.dirname(__FILE__)
-require 'lib/pie'
+template :game_screen
 
-make_pie do
-  template :game_screen
+place park:"You are in a park.  You see trees to the north and a path to the east"
+place trees:"You are in a Japanese garden."
+place river_edge:"The path ends at a river"
+place in_the_river:"You walk into the river and drown."
 
-  create_places do
-    park description:"You are in a park.  You see trees to the north and a path to the east"
-    trees description:"You are in a Japanese garden."
-    river_edge description:"The path ends at a river"
-    in_the_river description:"You walk into the river and drown."
-  end
+park.path trees:north, river_edge:east
+river_edge.path in_the_river:east!
 
-  map do 
-    path(park:"North", trees:"South")
-    path(park:"East", river_edge:"West")
-    path(river_edge:"East", in_the_river:NO_WAY_BACK)
-  end
+image park:"images/park.JPG"
+image river_edge:"images/water.JPG"
+image trees:"images/trees.JPG"
 
-  image park:"images/park.JPG"
-  image river_edge:"images/water.JPG"
-  image trees:"images/trees.JPG"
-end
