@@ -13,7 +13,7 @@ Pie requires Ruby 1.9, because it is so cool.
     pie game.pie
 
 then go to:
-    http://localhost:4567/park
+    http://localhost:31415/park
 
 Follow links to wander around the game world.  Yes, that is all there is right now.
 
@@ -24,9 +24,9 @@ There is a sample in book.rb.  To use it:
     pie book.pie
 
 then go to:
-    http://localhost:4567/ship
-    http://localhost:4567/building
-    http://localhost:4567/tower
+    http://localhost:31415/ship
+    http://localhost:31415/building
+    http://localhost:31415/tower
 
 Someday there will be UI to change pages.
 
@@ -38,7 +38,7 @@ I want to try to resist adding any new features until we have no bugs and kid-fr
 
 ## Pie Contributors
 
-Core team (in order of appearance)
+Core team (in order of appearance) 
 * Sarah Allen 
 * Sarah Mei
 * Rich Kilmer
