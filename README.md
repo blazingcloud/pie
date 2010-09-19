@@ -33,17 +33,20 @@ Someday there will be UI to change pages.
 ## Issues?
 
 Bugs and features are tracked here: http://www.pivotaltracker.com/projects/115060
+
 I want to try to resist adding any new features until we have no bugs and kid-friendly error messages.  Help is welcome.  Feel free to fork and submit pull requests or just tweet or email ideas.
 
 
 ## Pie Contributors
 
-Core team (in order of appearance) 
+Core team (in order of appearance)
+
 * Sarah Allen 
 * Sarah Mei
 * Rich Kilmer
 
 Contributors
+
 * Dan Steinicke
 * Akira Matsuda
 * Chad Fowler
