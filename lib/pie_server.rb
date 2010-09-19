@@ -9,6 +9,7 @@ class WebApp < Sinatra::Base
 
   get '/:place_name' do
     name = params[:place_name].to_sym
+    puts "going to place with name #{name}"
     current_place(name) unless name.nil?
     puts "current place name is #{current_place.name}"
     puts "current place is #{current_place.description}"

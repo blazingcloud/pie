@@ -6,11 +6,22 @@ Pie requires Ruby 1.9, because it is so cool.
 
 ## Examples
 
-### Book
+
+
+### Game
+
+    pie game.pie
+
+then go to:
+    http://localhost:4567/park
+
+Follow links to wander around the game world.  Yes, that is all there is right now.
+
+### Book -- NOT WORKING YET
 
 There is a sample in book.rb.  To use it:
 
-    ruby book.rb
+    pie book.pie
 
 then go to:
     http://localhost:4567/ship
@@ -18,15 +29,6 @@ then go to:
     http://localhost:4567/tower
 
 Someday there will be UI to change pages.
-
-### Game
-
-    ruby game.rb
-
-then go to:
-    http://localhost:4567/park
-
-Follow links to wander around the game world.  Yes, that is all there is right now.
 
 ## Issues?
 
