@@ -51,6 +51,8 @@ module Pie
   end
   
   def current_place(name=nil)
+    puts "current_place"
+    puts places.inspect
     if name
       Pie[:current_place] = places[name.to_sym]
     else
