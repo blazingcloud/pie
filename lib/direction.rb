@@ -1,6 +1,7 @@
 module Pie
-
+  
   class Direction < String
+    
     def opposite(opposite_name = nil)
       if opposite_name
         @opposite_name = opposite_name
@@ -20,16 +21,16 @@ module Pie
   end
   
   def north
-    @north ||= direction('Go North', 'Go South')
+    @north ||= direction(Pie.localized(:go_north), Pie.localized(:go_south))
   end
   def south
-    @south ||= direction('Go South', 'Go North')
+    @south ||= direction(Pie.localized(:go_south), Pie.localized(:go_north))
   end
   def east
-    @east ||= direction('Go East', 'Go West')
+    @east ||= direction(Pie.localized(:go_east), Pie.localized(:go_west))
   end
   def west
-    @west ||= direction('Go West', 'Go East')
+    @west ||= direction(Pie.localized(:go_west), Pie.localized(:go_east))
   end
   def north!
     direction(north)
