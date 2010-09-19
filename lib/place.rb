@@ -17,7 +17,7 @@ class Pie::Place
   def path(nodes)
     nodes.each do |place_name, direction|
       paths[place_name] = direction
-      places[place_name].paths[name] = direction.opposite unless direction.dead_end?
+      places[place_name].paths[name] = direction.opposite unless  !direction.respond_to?(:dead_end?) || direction.dead_end? 
     end
   end
   

@@ -76,6 +76,11 @@ describe "baking pie" do
         cliff_top.paths.should == {cliff_bottom:east}
         cliff_bottom.paths.should == {}
       end
+
+      it "should support simple strings" do
+        field.path cliff_bottom:"flying leap"
+        field.paths[:cliff_bottom].should == "flying leap"
+      end
     end
 
   end
