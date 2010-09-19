@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title><%= $current %></title>
+	<title><%= current_place.name %></title>
 	<style type="text/css" media="screen">
 		
 		
@@ -49,12 +49,12 @@
 </head>
 
 <body>
-<img src="<%= $pie.current_image %>" class="bg" />
+<img src="<%= current_image %>" class="bg" />
 <div id="content">
-  <p><%= $pie.current_description %></p>
+  <p><%= current_place.description %></p>
   <p>
-  <% $pie.places[$current].links.each do |place_name, label| %>
-    <%= "  <a href='#{place_name}'>#{label.to_s}</a>  "  %>
+  <% current_place.paths.each do |place_name, label| %>
+    <%= "  <a href='#{place_name}'>#{label}</a>  "  %>
   <% end %>
   </p>
 </div>
