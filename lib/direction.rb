@@ -1,34 +1,27 @@
 module Pie
 
-  class DeadEnd < String
-    def dead_end?
-      true
-    end
-  end
-  
   class Direction < String
-    def opposite(display_name = nil)
-      if display_name
-        @display_name = display_name
+    def opposite(opposite_name = nil)
+      if opposite_name
+        @opposite_name = opposite_name
       else 
-        @display_name
+        @opposite_name
       end
     end
     def dead_end?
-      false
+      @opposite_name.nil?
     end
   end
   
-  def direction(forward, back)
+  def direction(forward, back = nil)
     dir = Direction.new(forward)
-    dir.opposite(back)
+    dir.opposite(back) if back
     dir
   end
   
   def north
     @north ||= direction('Go North', 'Go South')
   end
-  
   def south
     @south ||= direction('Go South', 'Go North')
   end
@@ -38,19 +31,16 @@ module Pie
   def west
     @west ||= direction('Go West', 'Go East')
   end
-  def dead_end(name)
-    DeadEnd.new(name)
-  end
   def north!
-    dead_end(north)
+    direction(north)
   end
   def south!
-    dead_end(south)
+    direction(south)
   end
   def east!
-    dead_end(east)
+    direction(east)
   end
   def west!
-    dead_end(west)
+    direction(west)
   end
 end
