@@ -49,11 +49,11 @@
 </head>
 
 <body>
-<img src="<%= current_image %>" class="bg" />
+<img src="<%= pie.current_image %>" class="bg" />
 <div id="content">
-  <p><%= current_place.description %></p>
+  <p><%= pie.current_place.description %></p>
   <p>
-  <% current_place.paths.each do |place_name, label| %>
+  <% pie.current_place.paths.each do |place_name, label| %>
     <%= "  <a href='#{place_name}'>#{label}</a>  "  %>
   <% end %>
   </p>

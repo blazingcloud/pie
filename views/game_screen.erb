@@ -52,14 +52,14 @@
 
 <body>
 <div id="background">
-  <% if thing.current_image %>
-    <img src="<%= thing.current_image %>" />
+  <% if pie.current_image %>
+    <img src="<%= pie.current_image %>" />
   <% end %>
 </div>
 <div id="content">
-  <p><%= thing.current_place.description %></p>
+  <p><%= pie.current_place.description %></p>
   <p>
-  <% thing.current_place.paths.each do |place_name, label| %>
+  <% pie.current_place.paths.each do |place_name, label| %>
     <%= "  <a href='#{place_name}'>#{label}</a>  "  %>
   <% end %>
   </p>

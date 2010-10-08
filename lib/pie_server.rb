@@ -9,17 +9,19 @@ class WebApp < Sinatra::Base
 
   get '/:place_name' do
     puts "============================================"
-    thing ||= $thing
-    thing ||= request.env["PIE_THING"]
-    puts "thing = #{thing.inspect}"
+    puts "settings.pie_data = #{settings.pie_data.inspect}"
+    
+    pie ||= settings.pie_data
+    pie ||= request.env["PIE_DATA"]
+    puts "pie = #{pie.inspect}"
       name = params[:place_name].to_sym
-      thing.current_place(name) unless name.nil?
-      puts "current place name is #{thing.current_place.name}"
-      puts "current place is #{thing.current_place.description}"
-      puts "--- skip out"; return if thing.current_place.nil?
-      puts "current links are #{thing.current_place.paths.inspect}"
-      puts "displaying template: #{thing.template.inspect}"
-      erb thing.template, {}, {:thing => thing}
+      pie.current_place(name) unless name.nil?
+      puts "current place name is #{pie.current_place.name}"
+      puts "current place is #{pie.current_place.description}"
+      puts "--- skip out"; return if pie.current_place.nil?
+      puts "current links are #{pie.current_place.paths.inspect}"
+      puts "displaying template: #{pie.template.inspect}"
+      erb pie.template, {}, {:pie => pie}
   end
 
 end
