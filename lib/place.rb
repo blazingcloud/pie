@@ -6,8 +6,6 @@ class Pie::Place
     @paths = {}
     extract_standard_options(options)
     extract_name_and_description(options)
-    build_place_method
-    register_place
   end
   
   def to_s
@@ -17,7 +15,7 @@ class Pie::Place
   def path(nodes)
     nodes.each do |place_name, direction|
       paths[place_name] = direction
-      places[place_name].paths[name] = direction.opposite unless  !direction.respond_to?(:dead_end?) || direction.dead_end? 
+      Pie.places[place_name].paths[name] = direction.opposite unless  !direction.respond_to?(:dead_end?) || direction.dead_end? 
     end
   end
   
@@ -31,17 +29,4 @@ class Pie::Place
   
   def extract_standard_options(options)
   end
-  
-  def build_place_method
-    Pie.module_eval %{
-      def #{name}
-        places[:#{name}]
-      end
-    }
-  end
-  
-  def register_place
-    places[name] = self
-  end
-
 end

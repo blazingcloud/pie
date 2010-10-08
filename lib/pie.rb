@@ -29,6 +29,10 @@ module Pie
     }
     @values[@language || :english][id]
   end
+
+  def self.places
+    Pie[:places] ||= {}
+  end
   
   def template(name = nil)
     if name
@@ -47,12 +51,17 @@ module Pie
   end
 
   def place(options)
-    Place.new(options)
+    new_place = Place.new(options)
+    name = new_place.name
+    self.instance_eval %{
+      def #{name}
+        places[:#{name}]
+      end
+    }
+    places[new_place.name] = new_place
   end
   
   def current_place(name=nil)
-    puts "current_place"
-    puts places.inspect
     if name
       Pie[:current_place] = places[name.to_sym]
     else
@@ -65,7 +74,7 @@ module Pie
   end
   
   def places
-    Pie[:places] ||= {}
+    Pie.places
   end
   
   def language(language)

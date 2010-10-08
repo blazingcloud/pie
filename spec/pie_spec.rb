@@ -1,46 +1,63 @@
 require File.join(File.expand_path(File.dirname(__FILE__)), "..", "lib", "pie")
 
-include Pie
+class Game
+  include Pie
+end
 
 describe "baking pie" do
-  
-  describe "can access the current_place" do
-    current_place.should == nil
-    place ship:"this is a ship"
-    current_place(:ship)
-    current_place.should == ship
-    place land:"this is land"
-    current_place('land')
-    current_place.should == land
+  before do
+    @game = Game.new
+  end  
+  describe "included in a class" do
+
+    it "can access the current_place" do
+      @game.instance_eval do
+        current_place.should == nil
+        place ship:"this is a ship"
+        current_place(:ship)
+        current_place.should == ship
+        place land:"this is land"
+        current_place('land')
+        current_place.should == land
+      end
+    end
   end
-  
+
   describe "with template" do
     it "has a default template" do
-      template.should == :image_page
+      @game.template.should == :image_page
     end
     it "can set an alternate template" do
-      template :foo
-      template.should == :foo
+      @game.instance_eval do
+        template :foo
+        template.should == :foo
+      end
     end
   end
   describe "image declaration" do
     it "can declare an image" do
-      image ship:"http://foo.com/ship.png"
-      images[:ship].should == "http://foo.com/ship.png"
+      @game.instance_eval do
+        image ship:"http://foo.com/ship.png"
+        images[:ship].should == "http://foo.com/ship.png"
+      end
     end
 
     it "can declare multiple image statements" do
-      image ship:"http://foo.com/ship.png"
-      image basket:"http://foo.com/basket.png"
-      images[:ship].should == "http://foo.com/ship.png"
-      images[:basket].should == "http://foo.com/basket.png"
+      @game.instance_eval do
+        image ship:"http://foo.com/ship.png"
+        image basket:"http://foo.com/basket.png"
+        images[:ship].should == "http://foo.com/ship.png"
+        images[:basket].should == "http://foo.com/basket.png"
+      end
     end
 
     it "can declare multiple images with one statement" do
-      image ship:"http://foo.com/ship.png",
+      @game.instance_eval do
+        image ship:"http://foo.com/ship.png",
             basket:"http://foo.com/basket.png"
-      images[:ship].should == "http://foo.com/ship.png"
-      images[:basket].should == "http://foo.com/basket.png"
+        images[:ship].should == "http://foo.com/ship.png"
+        images[:basket].should == "http://foo.com/basket.png"
+      end
     end
   end
 
@@ -48,42 +65,52 @@ describe "baking pie" do
 
     it "can create a place with extra options raises an error" do
       lambda {
-        place ship:"this is a ship", extra_option:"this"
+        @game.place ship:"this is a ship", extra_option:"this"
       }.should raise_error
     end
 
     it "can create a place with a description" do
-      place ship:"this is a ship"
-      ship.should be_a(Place)
-      ship.name.should == :ship
-      ship.description.should == "this is a ship"
+      @game.instance_eval do
+        place ship:"this is a ship"
+        ship.class.should == Place
+        ship.name.should == :ship
+        ship.description.should == "this is a ship"
+      end
     end
 
     describe "with paths" do
       before do
-        place field:"You are in a large, grassy field. You see many trees to the north and a path to the east"
-        place forest:"It is dark in the forest"
-        place cliff_top:"The path ends at the top of a steep cliff"
-        place cliff_bottom:"You walked off the cliff and fell to your death"
+        @game.instance_eval do
+          place field:"You are in a large, grassy field. You see many trees to the north and a path to the east"
+          place forest:"It is dark in the forest"
+          place cliff_top:"The path ends at the top of a steep cliff"
+          place cliff_bottom:"You walked off the cliff and fell to your death"
+        end
       end
       it "should have links between two places" do
-        field.path forest:north
-        field.paths.should == {forest:north}
-        forest.paths.should == {field:south}
+        @game.instance_eval do
+          field.path forest:north
+          field.paths.should == {forest:north}
+          forest.paths.should == {field:south}
+        end
       end
       it "should have one way links" do
-        cliff_top.path cliff_bottom:east!
-        cliff_top.paths.should == {cliff_bottom:east}
-        cliff_bottom.paths.should == {}
+        @game.instance_eval do
+          cliff_top.path cliff_bottom:east!
+          cliff_top.paths.should == {cliff_bottom:east}
+          cliff_bottom.paths.should == {}
+        end
       end
 
       it "should support simple strings" do
-        field.path cliff_bottom:"flying leap"
-        field.paths[:cliff_bottom].should == "flying leap"
+        @game.instance_eval do
+          field.path cliff_bottom:"flying leap"
+          field.paths[:cliff_bottom].should == "flying leap"
+        end
       end
     end
-
   end
+
   # describe "can access places" do
   #   before do
   #     ship description:"ookina fune"
