@@ -9,7 +9,7 @@ describe "app created with pie" do
   include Pie
 
   before do
-    Capybara.app = WebApp
+    Capybara.app = Pie::WebApp
   end
 
   it "should say hello for the root path" do

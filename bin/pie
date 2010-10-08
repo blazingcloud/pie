@@ -36,5 +36,5 @@ end
 end
 require 'pie_server'
 
-WebApp.set :pie_data, pie_data
-WebApp.run! :port => 31415 
+Pie::WebApp.set :pie_data, pie_data
+Pie::WebApp.run! :port => 31415 

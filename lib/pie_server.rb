@@ -1,6 +1,6 @@
 require 'sinatra/base'
 
-class WebApp < Sinatra::Base
+class Pie::WebApp < Sinatra::Base
   set :root, File.join(File.expand_path(File.dirname(__FILE__)), "..")
 
   get '/' do
@@ -8,7 +8,6 @@ class WebApp < Sinatra::Base
   end
 
   get '/:place_name' do
-    puts "============================================"
     puts "settings.pie_data = #{settings.pie_data.inspect}"
     
     pie ||= settings.pie_data
