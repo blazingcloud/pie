@@ -24,8 +24,15 @@ rescue LoadError
   require 'pie'
 end
 
+class PieThing
 include Pie
-load pie_file
+end
+$thing = PieThing.new
 
+File.open(pie_file) do |f|
+$thing.instance_eval do
+  eval(f.read)
+end
+end
 require 'pie_server'
 WebApp.run! :port => 31415 

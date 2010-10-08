@@ -52,14 +52,14 @@
 
 <body>
 <div id="background">
-  <% if current_image %>
-    <img src="<%= current_image %>" />
+  <% if thing.current_image %>
+    <img src="<%= thing.current_image %>" />
   <% end %>
 </div>
 <div id="content">
-  <p><%= current_place.description %></p>
+  <p><%= thing.current_place.description %></p>
   <p>
-  <% current_place.paths.each do |place_name, label| %>
+  <% thing.current_place.paths.each do |place_name, label| %>
     <%= "  <a href='#{place_name}'>#{label}</a>  "  %>
   <% end %>
   </p>

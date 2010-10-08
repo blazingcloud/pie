@@ -8,13 +8,18 @@ class WebApp < Sinatra::Base
   end
 
   get '/:place_name' do
-    name = params[:place_name].to_sym
-    current_place(name) unless name.nil?
-    puts "current place name is #{current_place.name}"
-    puts "current place is #{current_place.description}"
-    puts "--- skip out"; return if current_place.nil?
-    puts "current links are #{current_place.paths.inspect}"
-    puts "displaying template: #{template.inspect}"
-    erb template
+    puts "============================================"
+    thing ||= $thing
+    thing ||= request.env["PIE_THING"]
+    puts "thing = #{thing.inspect}"
+      name = params[:place_name].to_sym
+      thing.current_place(name) unless name.nil?
+      puts "current place name is #{thing.current_place.name}"
+      puts "current place is #{thing.current_place.description}"
+      puts "--- skip out"; return if thing.current_place.nil?
+      puts "current links are #{thing.current_place.paths.inspect}"
+      puts "displaying template: #{thing.template.inspect}"
+      erb thing.template, {}, {:thing => thing}
   end
+
 end
