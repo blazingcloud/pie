@@ -12,9 +12,14 @@ describe "app created with pie" do
     Capybara.app = Pie::WebApp
   end
 
-  it "should say hello for the root path" do
-    visit '/'
-    page.should have_content "hello"
+  describe "root path" do
+    before do
+      place ship:"ookina fune"
+    end
+    it "should visit the first place in the list" do
+      visit '/'
+      page.should have_content('ookina fune')
+    end
   end
 
   describe "with one place and an image" do
