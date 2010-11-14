@@ -53,12 +53,18 @@ module Pie
   def place(options)
     new_place = Place.new(options)
     name = new_place.name
-    self.instance_eval %{
-      def #{name}
-        places[:#{name}]
-      end
-    }
+    #self.instance_eval %{
+    #  def #{name}
+    #    places[:#{name}]
+    #  end
+    #}
     places[new_place.name] = new_place
+  end
+
+  def method_missing name
+    place = places[name.to_sym]
+    raise NoMethodError if place.nil?
+    place
   end
   
   def current_place(name=nil)
