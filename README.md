@@ -41,12 +41,13 @@ I want to try to resist adding any new features until we have no bugs and kid-fr
 
 Core team (in order of appearance)
 
-* Sarah Allen 
-* Sarah Mei
-* Rich Kilmer
+* Sarah Allen @ultrasaurs
+* Sarah Mei @sarahmei
+* Rich Kilmer @richkilmer
 
 Contributors
 
+* Matthew Bass @pelargir
 * Dan Steinicke
 * Akira Matsuda
 * Chad Fowler
