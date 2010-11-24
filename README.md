@@ -59,6 +59,6 @@ Contributors
 
 ## Related Projects
 
-* [hosted IDE](http://pie-bakery.heroku.com) [github](https://github.com/blazingcloud/pie-bakery)
+* [hosted IDE](http://pie-bakery.heroku.com) ([source code](https://github.com/blazingcloud/pie-bakery))
 * [mobile-pie](https://github.com/blazingcloud/mobile-pie)
 
