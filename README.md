@@ -34,8 +34,14 @@ Someday there will be UI to change pages.
 
 Bugs and features are tracked here: http://www.pivotaltracker.com/projects/115060
 
-I want to try to resist adding any new features until we have no bugs and kid-friendly error messages.  Help is welcome.  Feel free to fork and submit pull requests or just tweet or email ideas.
+If you are trying to develop a game or a book using pie and have a question, ask here: http://groups.google.com/group/pie-dev
 
+## If you want to help improve pie itself...
+
+I want to try to resist adding any new features until we have no bugs and kid-friendly error messages.  Help is welcome.  Feel free to fork and submit pull requests or join the google group http://groups.google.com/group/pie-cooks
+
+Sarah's talk on the making of pie
+http://www.slideshare.net/sarah.allen/the-making-of-pie 
 
 ## Pie Contributors
 
@@ -51,3 +57,13 @@ Contributors
 * Dan Steinicke
 * Akira Matsuda
 * Chad Fowler
+
+## Related Projects
+
+https://github.com/blazingcloud/pie-bakery
+http://pie-bakery.heroku.com
+
+https://github.com/blazingcloud/mobile-pie
+rake run:iphone
+rake run:android 
+
