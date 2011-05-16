@@ -3,6 +3,10 @@ require 'sinatra/base'
 class Pie::WebApp < Sinatra::Base
   set :root, File.join(File.expand_path(File.dirname(__FILE__)), "..")
 
+  get '/favicon.ico' do
+
+  end
+
   get '/*' do
     puts "env= #{request.env.inspect}"
     puts "request.env[PIE_DATA]= #{request.env["PIE_DATA"].inspect}"
@@ -18,7 +22,7 @@ class Pie::WebApp < Sinatra::Base
       puts "current links are #{pie.current_place.paths.inspect}"
       puts "displaying template: #{pie.template.inspect}"
       erb pie.template, {}, {:pie => pie}
-    else 
+    else
       puts "NO PIE! AAAAAH!"
     end
   end
