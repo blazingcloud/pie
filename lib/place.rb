@@ -2,10 +2,12 @@ class Pie::Place
   
   attr_reader :name, :description, :paths
   
-  def initialize(options)
+  def initialize(places, options)
     @paths = {}
+    @places = places
     extract_standard_options(options)
     extract_name_and_description(options)
+    @places[@name] = self
   end
   
   def to_s
@@ -15,7 +17,7 @@ class Pie::Place
   def path(nodes)
     nodes.each do |place_name, direction|
       paths[place_name] = direction
-      Pie.places[place_name].paths[name] = direction.opposite unless  !direction.respond_to?(:dead_end?) || direction.dead_end? 
+      @places[place_name].paths[name] = direction.opposite unless  !direction.respond_to?(:dead_end?) || direction.dead_end?
     end
   end
   

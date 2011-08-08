@@ -1,5 +1,9 @@
 module Pie
-  
+  attr_accessor :places
+
+  def initialize
+    @places = {}
+  end
   def self.[](key)
     (@map ||= {})[key]
   end
@@ -51,14 +55,7 @@ module Pie
   end
 
   def place(options)
-    new_place = Place.new(options)
-    name = new_place.name
-    #self.instance_eval %{
-    #  def #{name}
-    #    places[:#{name}]
-    #  end
-    #}
-    places[new_place.name] = new_place
+    Place.new(places, options)
   end
 
   def method_missing name
@@ -78,11 +75,7 @@ module Pie
   def current_image
     images[current_place.name] if current_place
   end
-  
-  def places
-    Pie.places
-  end
-  
+
   def language(language)
     Pie.language = language
   end

@@ -78,6 +78,22 @@ describe "baking pie" do
       end
     end
 
+    it "doesn't contain places from other games" do
+      @game.instance_eval do
+        place ship:"this is a ship"
+      end
+
+      @game2 = Game.new
+      @game2.instance_eval do
+        place boat:"this is a boat"
+      end
+
+      puts @game.places.inspect
+      puts @game2.places.inspect
+      @game2.places.length.should == 1
+
+    end
+
     describe "with paths" do
       before do
         @game.instance_eval do
