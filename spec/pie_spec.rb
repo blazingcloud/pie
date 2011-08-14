@@ -63,13 +63,13 @@ describe "baking pie" do
 
   describe "creates places" do
 
-    it "can create a place with extra options raises an error" do
+    it "raises an error when extra options are given" do
       lambda {
         @game.place ship:"this is a ship", extra_option:"this"
       }.should raise_error
     end
 
-    it "can create a place with a description" do
+    it "can have a description" do
       @game.instance_eval do
         place ship:"this is a ship"
         ship.class.should == Place
@@ -91,7 +91,6 @@ describe "baking pie" do
       puts @game.places.inspect
       puts @game2.places.inspect
       @game2.places.length.should == 1
-
     end
 
     describe "with paths" do
@@ -123,6 +122,14 @@ describe "baking pie" do
           field.path cliff_bottom:"flying leap"
           field.paths[:cliff_bottom].should == "flying leap"
         end
+      end
+      
+      it "raises an error when place doesn't exist" do
+        lambda {
+          @game.instance_eval do
+            field.path :xxx => north
+          end
+        }.should raise_error(Exception, "xxx is not a place")
       end
     end
   end

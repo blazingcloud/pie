@@ -16,7 +16,10 @@ class Pie::Place
 
   def path(nodes)
     nodes.each do |place_name, direction|
-      paths[place_name] = direction
+      place = @places[place_name]
+      raise "#{place_name} is not a place" if place.nil?
+      
+      @paths[place_name] = direction
       @places[place_name].paths[name] = direction.opposite unless  !direction.respond_to?(:dead_end?) || direction.dead_end?
     end
   end
