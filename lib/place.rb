@@ -1,5 +1,3 @@
-#require_relative 'pie.rb'
-
 class Pie::Place
   
   attr_reader :name, :description, :paths
