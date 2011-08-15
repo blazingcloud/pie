@@ -52,6 +52,7 @@ Core team (in order of appearance)
 
 Contributors
 
+* Sean Durham
 * Matthew Bass @pelargir
 * Dan Steinicke
 * Akira Matsuda
