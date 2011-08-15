@@ -48,15 +48,21 @@ class Pie::Place
       valid = true
       
     rescue SyntaxError => e
-      msg = "#{e.message}\nSorry, you can't name a place with a Ruby keyword, like '#{name}'"
-      
-      if e.message =~ /syntax error, unexpected \$end/
-        msg = "#{e.message}\n"+
-              "Sorry, You can't name a place 'class' "+
-              "because Ruby was expecting you to define a 'class' "+
-              "which is always followed by an 'end'"
+      msg = case e.message
+        when  /syntax error, unexpected \$end/
+          "#{e.message}\n"+
+          "Sorry, You can't name a place 'class' "+
+          "because Ruby was expecting you to define a 'class' "+
+          "which is always followed by an 'end'"
+        when  /syntax error, unexpected keyword/
+          "#{e.message}\nSorry, you can't name a place with a Ruby keyword, like '#{name}'"
+        else
+          # don't have an example where this happens, but I would guess there is one
+          "#{e.message}\nSorry, Ruby doesn't think that '#{name}' makes sense as the name of a place."
+
       end
-      
+
+     
       raise e.class, msg
       
     rescue ArgumentError => e
@@ -72,7 +78,7 @@ class Pie::Place
     end
     
     if !valid
-      raise("Sorry, you can't name a place with a name that Ruby already knows like 'String'")
+      raise("Sorry, you can't name a place with a name that Ruby already knows like '#{name}'")
     end
     
     @name = name
