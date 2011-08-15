@@ -5,6 +5,9 @@ class Pie::Place
   def initialize(places, options)
     @paths = {}
     @places = places
+    
+    
+    
     extract_standard_options(options)
     extract_name_and_description(options)
     @places[@name] = self
@@ -28,10 +31,51 @@ class Pie::Place
   
   def extract_name_and_description(options)
     raise "You seem to have extras option in this place!" unless options.length == 1
-    @name = options.keys.first
+    @name = options.keys.first if name_valid?(options.keys.first)
     @description = options.values.first
   end
   
   def extract_standard_options(options)
+  end
+  
+  def name_valid?(name)
+    valid = false
+    begin
+      result = eval name.to_s
+      # if there is no exception, it's a problem like String or something Ruby knows
+      
+    rescue NameError
+      # this is what we want, so that method_missing will be called if we use this as a place name
+      valid = true
+      
+    rescue SyntaxError => e
+      msg = "#{e.message}\nSorry, you can't name a place with a Ruby keyword, like '#{name}'"
+      
+      if e.message =~ /syntax error, unexpected \$end/
+        msg = "#{e.message}\n"+
+              "Sorry, You can't name a place 'class' "+
+              "because Ruby was expecting you to define a 'class' "+
+              "which is always followed by an 'end'"
+      end
+      
+      raise e.class, msg
+      
+    rescue ArgumentError => e
+      msg = "#{e.message}\n"+
+                  "You probably weren't trying to argue with Ruby, but it recognized '#{name}' and expected it to be followed by "+
+                  "some more input, which it calls 'arguments'. Sorry '#{name}' can't be a place name."
+      raise e.class, msg
+
+    rescue Exception => e
+      # other kinds of inappropriate names
+      msg = "#{e.message}\nSorry, you can't name a place with something like '#{name}'"
+      raise e.class, msg
+    end
+    
+    if !valid
+      raise("Sorry, you can't name a place with a name that Ruby already knows like 'String'")
+    end
+    
+    valid
   end
 end

@@ -92,6 +92,51 @@ describe "baking pie" do
       puts @game2.places.inspect
       @game2.places.length.should == 1
     end
+    
+    describe "gives an appropriate error" do
+      it "when a place is named with a Ruby keyword, like 'end'" do
+        lambda {
+          @game.instance_eval do
+            place end:"This is where it all ends."
+          end
+        }.should raise_error(SyntaxError, "(eval):1: syntax error, unexpected keyword_end\nSorry, you can't name a place with a Ruby keyword, like 'end'")
+      end
+      
+      it "when a place is named with a Ruby keyword, like 'do'" do
+        lambda {
+          @game.instance_eval do
+            place do:"Don't step in this."
+          end
+        }.should raise_error(SyntaxError, "(eval):1: syntax error, unexpected keyword_do_block\nSorry, you can't name a place with a Ruby keyword, like 'do'")
+      end
+      
+      it "when a place is named with a Ruby keyword, like 'class'" do
+        lambda {
+          @game.instance_eval do
+            place class:"This is a place in school."
+          end
+        }.should raise_error(SyntaxError, "(eval):1: syntax error, unexpected $end\nclass\n     ^\n"+
+          "Sorry, You can't name a place 'class' because Ruby was expecting you to define a 'class' which is always followed by an 'end'")
+      end
+      
+      it "when a place is named with a Ruby method, like 'eval'" do
+        lambda {
+          @game.instance_eval do
+            place eval:"Now you're playing with fire."
+          end
+        }.should raise_error(ArgumentError, "wrong number of arguments (0 for 1..4)\n" +
+                  "You probably weren't trying to argue with Ruby, but it recognized 'eval' and expected it to be followed by "+
+                  "some more input, which it calls 'arguments'. Sorry 'eval' can't be a place name.")
+      end
+      
+      it "when a place is named with a built-in class" do
+        lambda {
+          @game.instance_eval do
+            place String:"This is a really long place made of yarn."
+          end
+        }.should raise_error(Exception, "Sorry, you can't name a place with a name that Ruby already knows like 'String'")
+      end
+    end
 
     describe "with paths" do
       before do
@@ -127,7 +172,7 @@ describe "baking pie" do
       it "raises an error when place doesn't exist" do
         lambda {
           @game.instance_eval do
-            field.path :xxx => north
+            field.path xxx:north
           end
         }.should raise_error(Exception, "xxx is not a place")
       end
