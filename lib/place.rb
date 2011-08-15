@@ -1,3 +1,5 @@
+#require_relative 'pie.rb'
+
 class Pie::Place
   
   attr_reader :name, :description, :paths
@@ -5,8 +7,6 @@ class Pie::Place
   def initialize(places, options)
     @paths = {}
     @places = places
-    
-    
     
     extract_standard_options(options)
     extract_name_and_description(options)
@@ -28,17 +28,16 @@ class Pie::Place
   end
   
   private
-  
   def extract_name_and_description(options)
     raise "You seem to have extras option in this place!" unless options.length == 1
-    @name = options.keys.first if name_valid?(options.keys.first)
+    self.name = options.keys.first
     @description = options.values.first
   end
   
   def extract_standard_options(options)
   end
   
-  def name_valid?(name)
+  def name=(name)
     valid = false
     begin
       result = eval name.to_s
@@ -76,6 +75,8 @@ class Pie::Place
       raise("Sorry, you can't name a place with a name that Ruby already knows like 'String'")
     end
     
-    valid
+    @name = name
   end
+
+  
 end
