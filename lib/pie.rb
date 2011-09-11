@@ -60,7 +60,7 @@ module Pie
 
   def method_missing name
     place = places[name.to_sym]
-    raise NoMethodError if place.nil?
+    raise NoMethodError, "Pie was expecting a place named '#{name}', but we've only got places named: #{places.keys.join(', ')}"  if place.nil?
     place
   end
   

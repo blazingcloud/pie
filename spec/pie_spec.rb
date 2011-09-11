@@ -2,6 +2,10 @@ require File.join(File.expand_path(File.dirname(__FILE__)), "..", "lib", "pie")
 
 class Game
   include Pie
+
+  def get_binding
+    binding
+  end
 end
 
 describe "baking pie" do
@@ -94,6 +98,16 @@ describe "baking pie" do
     end
     
     describe "gives an appropriate error" do
+      it "when specifying a path from a place that does not exist" do
+        lambda {
+          @game.instance_eval do
+            place boat:"this is a boat"
+            something.path boat:north
+          end
+        }.should raise_error(SyntaxError, "#<NoMethodError: Pie was expecting a place named 'something', but we've only got places named: boat")
+
+      end
+
       it "when a place is named with a Ruby keyword, like 'end'" do
         lambda {
           @game.instance_eval do
@@ -101,7 +115,13 @@ describe "baking pie" do
           end
         }.should raise_error(SyntaxError, "(eval):1: syntax error, unexpected keyword_end\nSorry, you can't name a place with a Ruby keyword, like 'end'")
       end
-      
+     
+      it "when using eval and binding and a place is named with a Ruby keyword, like 'end'" do
+        lambda {
+          eval("template :game_screen\nplace end:\"This is where it all ends.\"", @game.get_binding)
+        }.should raise_error(SyntaxError, "(eval):1: syntax error, unexpected keyword_end\nSorry, you can't name a place with a Ruby keyword, like 'end'")
+      end
+
       it "when a place is named with a Ruby keyword, like 'do'" do
         lambda {
           @game.instance_eval do
