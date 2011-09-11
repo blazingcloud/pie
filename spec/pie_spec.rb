@@ -104,7 +104,7 @@ describe "baking pie" do
             place boat:"this is a boat"
             something.path boat:north
           end
-        }.should raise_error(SyntaxError, "#<NoMethodError: Pie was expecting a place named 'something', but we've only got places named: boat")
+        }.should raise_error(NoMethodError, "NoMethodError: Pie was expecting a place named 'something', but we've only got places named: boat")
 
       end
 
