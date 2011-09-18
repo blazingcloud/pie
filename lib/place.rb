@@ -1,6 +1,7 @@
 class Pie::Place
   
-  attr_reader :name, :description, :paths
+  attr_accessor  :description
+  attr_reader :name, :paths
   
   def initialize(places, options)
     @paths = {}
@@ -34,7 +35,7 @@ class Pie::Place
   
   def extract_standard_options(options)
   end
-  
+
   def name=(name)
     valid = false
     begin

@@ -189,7 +189,7 @@ describe "baking pie" do
         end
       end
       
-      it "raises an error when place doesn't exist" do
+      it "raises an error when non-existant place speficied in path" do
         lambda {
           @game.instance_eval do
             field.path xxx:north
@@ -199,49 +199,24 @@ describe "baking pie" do
     end
   end
 
-  # describe "can access places" do
-  #   before do
-  #     ship description:"ookina fune"
-  #     building description:"ookina biru"
-  #     tower description:"ookina towa"
-  #   end
-  # 
-  #   it "which are accessible by named key (symbol)" do
-  #     ship = $pie.places[:ship]
-  #     ship.should_not be_nil
-  #     ship[:description].should == "ookina fune"
-  #   end
-  #   
-  #   it "which are accessible by named key (string)" do
-  #     ship = $pie.places["ship"]
-  #     ship.should_not be_nil
-  #     ship[:description].should == "ookina fune"
-  #   end
-  # 
-  #   it "resulting in 2 places" do
-  #     $pie.places.length.should == 3
-  #   end
-  #   
-  #   it "and can find place after named place" do
-  #     building = $pie.places.after(:ship)
-  #     building.should_not be_nil
-  #     building[:description].should == "ookina biru"
-  #   end
-  #  
-  #   it "and finds nil after last place" do
-  #     nothing = $pie.places.after(:tower)
-  #     nothing.should be_nil
-  #   end
-  # 
-  #   it "and can find place before named place" do
-  #     building = $pie.places.before(:tower)
-  #     building.should_not be_nil
-  #     building[:description].should == "ookina biru"
-  #   end
-  # 
-  #   it "and finds nil before first place" do
-  #     nothing = $pie.places.before(:ship)
-  #     nothing.should be_nil
-  #   end
-  # end
+  describe "can access places" do
+    before do
+      @game.instance_eval do    
+        place ship:"ookina fune"
+        place building:"ookina biru"
+        place tower:"ookina towa"
+      end
+    end
+  
+    it "which are accessible by named key (symbol)" do
+      ship = @game.places[:ship]
+      ship.should_not be_nil
+      ship.description.should == "ookina fune"
+    end
+    
+    it "resulting in 2 places" do
+      @game.places.length.should == 3
+    end
+    
+  end
 end
